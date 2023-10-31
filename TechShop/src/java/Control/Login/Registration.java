@@ -10,12 +10,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import DAO.AccountDAO;
+import Model.Account.Role;
 import Model.Account.User;
-
+import java.sql.Date;
 
 public class Registration extends HttpServlet {
 
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class Registration extends HttpServlet {
         String raw_dob = request.getParameter("dob");
 
         RegexChecking v = new RegexChecking();
-        
+
         final String registrationJsp = "frontend/jsp/login/registration.jsp";
         //check information of user is validated
         if (v.checkString(raw_fullName) && v.validateEmail(raw_email) && v.validatePass(raw_pass) && v.validateMobile(raw_mobile)) {
@@ -56,39 +56,25 @@ public class Registration extends HttpServlet {
             User accExist = dAc.getAccount(email, pass);
 
             if (accExist == null) {
-                SendEmail sendEmail = new SendEmail();
-                //Random code to sendEmail
-                int numberOfCharactor = 8;
-                String code = sendEmail.randomAlphaNumeric(numberOfCharactor);
-                //save code in session
-                request.getSession().setAttribute("code", code);
-                request.getSession().setAttribute("email", email);
-                request.getSession().setAttribute("pass", pass);
-                request.getSession().setAttribute("raw_gender", raw_gender);
-                request.getSession().setAttribute("mobile", mobile);
-                request.getSession().setAttribute("address", address);
-                request.getSession().setAttribute("raw_dob", raw_dob);
-                request.getSession().setAttribute("name", name);
+                boolean gender = raw_gender.equals("Male");
+                Date dob = Date.valueOf(raw_dob);
 
-                String subject = "Authenticate gmail";
-                String message = "<!DOCTYPE html>\n"
-                        + "<html lang=\"en\">\n"
-                        + "\n"
-                        + "<head>\n"
-                        + "</head>\n"
-                        + "\n"
-                        + "<body>\n"
-                        + "    <h3 style=\"color: blue;\">Thank you for registering and participating in our program.</h3>\n"
-                        + "    <div>For your and our safety, we want you to make sure that the email you use to sign up is authenticated.</div>\n"
-                        + "    <div>Enter the code below to authenticate.</div><br/>\n"
-                        + "    <div>Code: " + code + "</div>\n"
-                        + "    <h3 style=\"color: blue;\">Thank you so much!</h3>\n"
-                        + "\n"
-                        + "</body>\n"
-                        + "\n"
-                        + "</html>";
-                SendEmail.send(email, subject, message, sendEmail.getUser(), sendEmail.getPass());
-                response.sendRedirect("verificationRegister");       
+                //insert to user table
+                User u = new User();
+                u.setEmail(email);
+                u.setName(name);
+                u.setGender(gender);
+                u.setPhone(mobile);
+                u.setAddress(address);
+                u.setDob(dob);
+                u.setPassword(pass);
+                Role r = new Role();
+                r.setId(3);
+                u.setRole(r);
+
+                dAc.insertAccount(u);
+                request.setAttribute("ok", "Register successfully!");
+                request.getRequestDispatcher(registrationJsp).forward(request, response);
             } else {
                 String exist = "This account is already exist. Try a new email!";
                 request.setAttribute("exist", exist);

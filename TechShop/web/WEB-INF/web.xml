@@ -21,18 +21,6 @@
         <servlet-class>Control.Login.Registration</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VerificationEmail</servlet-name>
-        <servlet-class>Control.Login.VerificationEmail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ResetPass</servlet-name>
-        <servlet-class>Control.Login.ResetPass</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EnterNewPass</servlet-name>
-        <servlet-class>Control.Login.EnterNewPass</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>Control.Login.ChangePasswordController</servlet-class>
     </servlet>
@@ -93,18 +81,6 @@
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VerificationEmail</servlet-name>
-        <url-pattern>/verificationRegister</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPass</servlet-name>
-        <url-pattern>/ResetPass</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EnterNewPass</servlet-name>
-        <url-pattern>/EnterNewPass</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
@@ -161,4 +137,12 @@
             1000000
         </session-timeout>
     </session-config>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/user/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/user/delete</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -45,9 +45,6 @@
                                         <input type="password" name="password" minlength="8" class="form-control bg-light border-0" placeholder="Your Password" style="height: 55px;" required>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <div class="date" id="date1" data-target-input="nearest" class="form-control bg-light border-0">
-                                            <a href="ResetPass" class="btn btn-dark w-100 py-3" style="color:white;font-size: 15px;background-color: #040e1e"><u>Forget password</u></a>
-                                        </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="time" id="time1" data-target-input="nearest" >
