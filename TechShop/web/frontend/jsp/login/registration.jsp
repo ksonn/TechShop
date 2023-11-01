@@ -4,132 +4,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../component/top.jsp"></jsp:include>
-    
-            <script>
-
-                function isValidDate(dateString)
-                {
-                    // First check for the pattern
-                    var regex_date = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
-                    if (!regex_date.test(dateString))
-                    {
-                        return false;
-                    }
-
-                    // Parse the date parts to integers
-                    var parts = dateString.split("-");
-                    var day = parseInt(parts[2], 10);
-                    var month = parseInt(parts[1], 10);
-                    var year = parseInt(parts[0], 10);
-                    // Check the ranges of month and year
-                    if (year < 1000 || year > 3000 || month == 0 || month > 12)
-                    {
-                        return false;
-                    }
-
-                    var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                    // Adjust for leap years
-                    if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-                    {
-                        monthLength[1] = 29;
-                    }
-                    if (day > 0 && day <= monthLength[month - 1]) {
-                        return true;
-                    } else {
-                        alert("Your date of birth is invalid. Try again");
-                        dateString.focus();
-                        return false;
-                    }
-                }
-                function ValidateEmail(uemail)
-                {
-                    var mailformat = /^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$/;
-                    if (uemail.value.match(mailformat))
-                    {
-                        return true;
-                    } else
-                    {
-                        alert("You have entered an invalid email address!\nExample format: abc123@gmail.com");
-                        uemail.focus();
-                        return false;
-                    }
-                }
-                function ValidateMobile(mobile)
-                {
-                    var mailformat = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}/;
-                    if (mobile.value.match(mailformat))
-                    {
-                        return true;
-                    } else
-                    {
-                        alert("User mobile must have number only");
-                        mobile.focus();
-                        return false;
-                    }
-                }
-                function alphanumeric(uadd)
-                {
-                    var letters = /^[0-9a-zA-Z]+$/;
-                    if (uadd.value.match(letters))
-                    {
-                        return true;
-                    } else
-                    {
-                        alert('User address must have alphanumeric characters only');
-                        uadd.focus();
-                        return false;
-                    }
-                }
-                function allLetter(uname)
-                {
-                    var letters = /^[A-Za-z ]+$/;
-                    if (uname.value.match(letters))
-                    {
-                        return true;
-                    }else
-                    {
-                        alert('Username must have alphabet characters only');
-                        uname.focus();
-                        return false;
-                    }
-                }
-                function ValidatePass(password)
-                {
-                    var mailformat = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}/;
-                    if (password.value.match(mailformat))
-                    {
-                        return true;
-                    } else
-                    {
-                        alert("Password must be including uppercase, lowercase, numbers, no whitespace and at least 8 technical characters");
-                        password.focus();
-                        return false;
-                    }
-                }
-                function validsex(umsex, ufsex)
-                {
-                    x = 0;
-                    if (umsex.checked)
-                    {
-                        x++;
-                    }
-                    if (ufsex.checked)
-                    {
-                        x++;
-                    }
-                    if (x == 0)
-                    {
-                        alert('Select Male/Female');
-                        umsex.focus();
-                        return false;
-                    } else
-                    {
-                        alert('Form Successfully Submitted');
-                        window.location.reload();
-                        return true;
-                    }
-                }
-            </script>
         </head>
         
 
@@ -149,7 +23,7 @@
             <!-- Contact Start -->
             <div class="container-fluid py-5">
                 <div class="container">
-                    <form action="Registration" method="POST" name="registration">
+                    <form action="Registration" method="POST">
                         <div class="row g-5">
                             <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s">
                                 <div class="bg-light rounded h-100 p-5">
